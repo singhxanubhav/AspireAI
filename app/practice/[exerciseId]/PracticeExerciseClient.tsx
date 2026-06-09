@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
-import { Play, Send, RotateCcw, CheckCircle2, XCircle, Lightbulb, Terminal, FileText, Sparkles, Maximize2, Minimize2, Code2 } from "lucide-react";
+import { Play, Send, RotateCcw, CheckCircle2, XCircle, Lightbulb, Terminal, FileText, Sparkles, Maximize2, Minimize2, Code2, Trophy } from "lucide-react";
 
 const MonacoEditor = dynamic(() => import("@monaco-editor/react"), { ssr: false });
 
@@ -49,10 +49,11 @@ export function PracticeExerciseClient({
     feedback: string;
     score: number;
   } | null>(null);
+  const [activeTab, setActiveTab] = useState<"Description" | "Hints">("Description");
   const [revealedHints, setRevealedHints] = useState(0);
   const [showOutput, setShowOutput] = useState(false);
-  const [activeTab, setActiveTab] = useState<"Description" | "Hints">("Description");
   const [outputExpanded, setOutputExpanded] = useState(false);
+  const [levelUp, setLevelUp] = useState<string | null>(null);
 
   const runCode = useCallback(async () => {
     setIsRunning(true);
@@ -90,6 +91,10 @@ export function PracticeExerciseClient({
         ? `✅ All tests passed!\n\nScore: ${data.score}/100\n\n${data.feedback}`
         : `❌ Some tests failed\n\nScore: ${data.score}/100\n\n${data.feedback}`
       );
+      if (data.leveledUp) {
+        setLevelUp(data.newLevel);
+        setTimeout(() => setLevelUp(null), 4000);
+      }
     } catch {
       setOutput("Failed to submit. Check your connection.");
       setSubmitResult({ correct: false, feedback: "Connection error", score: 0 });
@@ -110,6 +115,17 @@ export function PracticeExerciseClient({
 
   return (
     <>
+      {levelUp && (
+        <div className="fixed top-20 right-4 z-50 animate-in slide-in-from-right-4 fade-in duration-300">
+          <div className="rounded-xl bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-3 shadow-2xl shadow-yellow-500/30 flex items-center gap-3">
+            <Trophy className="h-5 w-5" />
+            <div>
+              <p className="text-sm font-bold">Level Up!</p>
+              <p className="text-xs text-white/80">You reached {levelUp === "MODERATE" ? "Moderate" : "Advanced"}!</p>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="w-1/2 min-w-0 flex flex-col bg-white border-r border-white/10">
         <div className="shrink-0 flex border-b border-gray-200">
           {TABS.map((tab) => (

@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { GoogleGenAI } from "@google/genai";
+import { calculateLevel } from "@/lib/levelCalculator";
 
 export async function POST(req: Request) {
   try {
@@ -107,7 +108,27 @@ Is the student code functionally correct? Reply with valid JSON only (no markdow
       },
     });
 
-    return Response.json({ correct, feedback, score });
+    let leveledUp = false;
+    let newLevel: string | undefined;
+    if (isPassing) {
+      const completedCount = await prisma.userProgress.count({
+        where: { userId: session.user.id, completed: true },
+      });
+      newLevel = calculateLevel(completedCount);
+      const user = await prisma.user.findUnique({
+        where: { id: session.user.id },
+        select: { codingLevel: true },
+      });
+      if (user && user.codingLevel !== newLevel) {
+        await prisma.user.update({
+          where: { id: session.user.id },
+          data: { codingLevel: newLevel as any },
+        });
+        leveledUp = true;
+      }
+    }
+
+    return Response.json({ correct, feedback, score, leveledUp, newLevel });
   } catch (error) {
     console.error("Code submit API error:", error);
     return Response.json({
