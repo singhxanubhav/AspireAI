@@ -66,10 +66,7 @@ export default function Navbar() {
           {isAuth ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center gap-2 px-2"
-                >
+                <button className="flex items-center gap-2 px-2 py-1 rounded-lg cursor-pointer hover:bg-brand-light transition-colors outline-none">
                   <Avatar className="h-8 w-8">
                     <AvatarFallback className="bg-brand-light text-brand-primary text-xs">
                       {user?.name?.charAt(0)?.toUpperCase() || "U"}
@@ -79,7 +76,7 @@ export default function Navbar() {
                     {user?.name || "User"}
                   </span>
                   <ChevronDown className="h-4 w-4 text-gray-400" />
-                </Button>
+                </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-48">
                 <DropdownMenuItem asChild>
