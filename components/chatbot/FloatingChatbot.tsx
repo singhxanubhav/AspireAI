@@ -63,7 +63,7 @@ function CodeBlock({
   children: string;
 }) {
   return (
-    <div className="my-2 rounded-lg overflow-hidden text-xs">
+    <div className="my-2 rounded-lg overflow-hidden text-xs [&_div::-webkit-scrollbar]:hidden [&_div]:[-ms-overflow-style:none] [&_div]:[scrollbar-width:none]">
       <div className="flex items-center justify-between bg-[#3a3f4b] px-3 py-1.5">
         <span className="text-[11px] text-gray-400 font-mono">
           {language || "code"}
@@ -231,11 +231,41 @@ export default function FloatingChatbot() {
         body: JSON.stringify({ message: text, context, history }),
       });
 
-      const data = await res.json();
+      if (!res.ok) throw new Error("API error");
+
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        const data = await res.json();
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: data.response },
+        ]);
+        return;
+      }
+
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: data.response },
+        { role: "assistant", content: "" },
       ]);
+
+      const reader = res.body?.getReader();
+      const decoder = new TextDecoder();
+      if (!reader) throw new Error("No stream reader available");
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunkText = decoder.decode(value, { stream: true });
+        setMessages((prev) => {
+          const newMessages = [...prev];
+          const lastIndex = newMessages.length - 1;
+          newMessages[lastIndex] = {
+            ...newMessages[lastIndex],
+            content: newMessages[lastIndex].content + chunkText,
+          };
+          return newMessages;
+        });
+      }
     } catch {
       setMessages((prev) => [
         ...prev,
@@ -327,7 +357,7 @@ export default function FloatingChatbot() {
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 min-h-0">
+            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 min-h-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {initialLoading ? (
                 <div className="flex items-center justify-center h-full">
                   <div className="flex flex-col items-center gap-2 text-muted-foreground">

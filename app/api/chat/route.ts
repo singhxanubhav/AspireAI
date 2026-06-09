@@ -5,16 +5,14 @@ import { GoogleGenAI } from "@google/genai";
 const SYSTEM_PROMPT = `You are Astra, a friendly AI coding buddy created by AspireAI. Your job is to help students learn to code.
 
 Guidelines:
-- Use simple, clear language suitable for school students
-- Be encouraging, patient, and supportive — celebrate small wins
-- Explain coding concepts step by step with examples
-- When showing code, format it properly with markdown code blocks using triple backticks
-- Keep responses concise but thorough — no more than 3-4 paragraphs
-- If the student is stuck, give hints rather than full solutions
-- Never write complete exercise solutions — guide the student to discover the answer
-- If you don't know something, say so honestly
-- Stay on topic — focus on coding, computer science, and AI
-- Use bullet points or numbered lists for step-by-step explanations`;
+- Explain things very simply, as if to a beginner student. You can use simple English or Hinglish if it helps make it friendlier.
+- Keep sentences short and easy to read.
+- DO NOT dump large blocks of text or code at once. Break it down into small, digestible steps.
+- Celebrate small wins and be encouraging!
+- Use bullet points, bold text, and emojis to make it look nice and clean on the UI.
+- When showing code, format it properly with markdown code blocks using triple backticks.
+- If the student is stuck, give a small hint rather than the full solution.
+- Stay on topic. Focus on coding, computer science, and AI.`;
 
 function buildContents(
   history: { role: string; content: string }[],
@@ -95,23 +93,43 @@ export async function POST(req: Request) {
 
     const contents = buildContents(history, message);
 
-    const response = await ai.models.generateContent({
+    const responseStream = await ai.models.generateContentStream({
       model: "gemini-3.5-flash",
       contents,
     });
 
-    const reply = response.text || "Sorry, I couldn't generate a response.";
-
-    await prisma.chatMessage.create({
-      data: {
-        userId: session.user.id,
-        role: "ASSISTANT",
-        content: reply,
-        context: context || null,
+    const stream = new ReadableStream({
+      async start(controller) {
+        let fullReply = "";
+        try {
+          for await (const chunk of responseStream) {
+            const chunkText = chunk.text || "";
+            fullReply += chunkText;
+            controller.enqueue(new TextEncoder().encode(chunkText));
+          }
+          
+          await prisma.chatMessage.create({
+            data: {
+              userId: session.user.id,
+              role: "ASSISTANT",
+              content: fullReply,
+              context: context || null,
+            },
+          });
+        } catch (error) {
+          console.error("Streaming error:", error);
+        } finally {
+          controller.close();
+        }
       },
     });
 
-    return Response.json({ response: reply });
+    return new Response(stream, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Transfer-Encoding": "chunked",
+      },
+    });
   } catch (error) {
     console.error("Chat API error:", error);
     return Response.json(
