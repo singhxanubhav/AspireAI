@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   // Clean existing data
+  await prisma.exerciseProgress.deleteMany();
   await prisma.chatMessage.deleteMany();
   await prisma.userProgress.deleteMany();
   await prisma.exercise.deleteMany();

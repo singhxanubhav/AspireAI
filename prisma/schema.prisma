@@ -46,6 +46,7 @@ model User {
   sessions    Session[]
   progress    UserProgress[]
   chatHistory ChatMessage[]
+  exerciseProgress ExerciseProgress[]
 }
 
 model Account {
@@ -126,6 +127,8 @@ model Exercise {
   difficulty  Difficulty @default(EASY)
 
   lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  exerciseProgress ExerciseProgress[]
 }
 
 model UserProgress {
@@ -139,6 +142,21 @@ model UserProgress {
   lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
 
   @@unique([userId, lessonId])
+}
+
+model ExerciseProgress {
+  id          String    @id @default(cuid())
+  userId      String
+  exerciseId  String
+  completed   Boolean   @default(false)
+  score       Int?
+  code        String?   @db.Text
+  completedAt DateTime?
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, exerciseId])
 }
 
 model ChatMessage {
