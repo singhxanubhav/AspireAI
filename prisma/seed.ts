@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { PrismaClient, Language, Difficulty } from "../generated/prisma/client";
+import { PrismaClient, Language, Difficulty } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
