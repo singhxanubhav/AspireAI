@@ -83,7 +83,7 @@ export default function CourseSidebar({
             <Lightbulb className="h-4 w-4 text-white" />
           </div>
           <span className="text-base font-bold font-heading text-brand-primary">
-            Aspire<span className="text-brand-accent">AI</span>
+            Avenza<span className="text-brand-accent">AI</span>
           </span>
         </Link>
       </div>
@@ -235,7 +235,7 @@ export default function CourseSidebar({
                 <Lightbulb className="h-4 w-4 text-white" />
               </div>
               <SheetTitle className="text-base font-bold font-heading text-brand-primary">
-                Aspire<span className="text-brand-accent">AI</span>
+                Avenza<span className="text-brand-accent">AI</span>
               </SheetTitle>
             </div>
           </SheetHeader>

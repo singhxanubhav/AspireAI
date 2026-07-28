@@ -50,7 +50,7 @@ export default function Footer() {
                 <Lightbulb className="h-4 w-4 text-white" />
               </div>
               <span className="text-lg font-bold font-heading text-brand-primary">
-                Aspire<span className="text-brand-accent">AI</span>
+                Avenza<span className="text-brand-accent">AI</span>
               </span>
             </Link>
             <p className="text-sm text-gray-500 max-w-xs">
@@ -96,7 +96,7 @@ export default function Footer() {
 
         <div className="mt-10 pt-6 border-t text-center">
           <p className="text-xs text-gray-400">
-            &copy; {new Date().getFullYear()} AspireAI. All rights reserved.
+            &copy; {new Date().getFullYear()} AvenzaAI. All rights reserved.
           </p>
         </div>
       </div>

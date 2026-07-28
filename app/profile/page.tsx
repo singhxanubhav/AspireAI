@@ -6,7 +6,7 @@ import { GoogleGenAI } from "@google/genai";
 
 export const metadata: Metadata = {
   title: "Profile",
-  description: "Your AspireAI learning dashboard — track progress, streaks, and activity.",
+  description: "Your AvenzaAI learning dashboard — track progress, streaks, and activity.",
 };
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";

@@ -7,7 +7,7 @@ import { Sparkles, Bot, Target, ArrowRight, Check, Lightbulb } from "lucide-reac
 
 const STEPS = [
   {
-    title: "Welcome to AspireAI!",
+    title: "Welcome to AvenzaAI!",
     subtitle: "Let's get you started on your learning journey.",
     icon: <Sparkles className="h-8 w-8" />,
   },
@@ -88,7 +88,7 @@ export function OnboardingModal({
                 Hey{name ? ` ${name}` : ""}! We&apos;re thrilled to have you here.
               </p>
               <p className="text-sm text-muted-foreground">
-                AspireAI helps you learn coding and AI with step-by-step lessons,
+                AvenzaAI helps you learn coding and AI with step-by-step lessons,
                 hands-on practice, and a personal AI tutor.
               </p>
             </div>
@@ -129,7 +129,7 @@ export function OnboardingModal({
                 {STEPS[2].title}
               </h2>
               <p className="text-muted-foreground">
-                Astra is your AI coding buddy — built right into AspireAI.
+                Astra is your AI coding buddy — built right into AvenzaAI.
               </p>
               <div className="rounded-xl bg-brand-primary/[0.03] border border-brand-primary/10 p-4 text-left space-y-2">
                 <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary">

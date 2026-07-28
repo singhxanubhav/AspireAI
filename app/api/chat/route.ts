@@ -2,7 +2,7 @@ import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 import { GoogleGenAI } from "@google/genai";
 
-const SYSTEM_PROMPT = `You are Astra, a friendly AI coding buddy created by AspireAI. Your job is to help students learn to code.
+const SYSTEM_PROMPT = `You are Astra, a friendly AI coding buddy created by AvenzaAI. Your job is to help students learn to code.
 
 Guidelines:
 - Explain things very simply, as if to a beginner student. You can use simple English or Hinglish if it helps make it friendlier.

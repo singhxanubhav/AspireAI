@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Learn about AspireAI — the platform that helps beginners learn coding and AI.",
+  description: "Learn about AvenzaAI — the platform that helps beginners learn coding and AI.",
 };
 
 export default function AboutPage() {
@@ -23,7 +23,7 @@ export default function AboutPage() {
               <Lightbulb className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
             </span>
             <div>
-              <h1 className="text-3xl sm:text-4xl font-bold font-heading text-foreground">AspireAI</h1>
+              <h1 className="text-3xl sm:text-4xl font-bold font-heading text-foreground">AvenzaAI</h1>
               <p className="text-base sm:text-lg text-muted-foreground">Learn Coding & AI</p>
             </div>
           </div>

@@ -18,16 +18,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: { default: "AspireAI — Learn Coding & AI", template: "%s — AspireAI" },
+  title: { default: "AvenzaAI — Learn Coding & AI", template: "%s — AvenzaAI" },
   description: "Step-by-step tutorials, hands-on practice, and an AI tutor available 24/7. Perfect for beginners.",
   icons: {
     icon: "/favicon.svg",
   },
   openGraph: {
-    title: "AspireAI — Learn Coding & AI",
+    title: "AvenzaAI — Learn Coding & AI",
     description: "Step-by-step tutorials, hands-on practice, and an AI tutor available 24/7.",
     type: "website",
-    siteName: "AspireAI",
+    siteName: "AvenzaAI",
   },
 };
 

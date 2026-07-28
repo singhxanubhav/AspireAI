@@ -7,7 +7,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Courses",
-  description: "Browse all coding and AI courses on AspireAI.",
+  description: "Browse all coding and AI courses on AvenzaAI.",
 };
 import {
   BookOpen,

@@ -107,7 +107,7 @@ export default function HeroSection({ user }: HeroSectionProps) {
                   <div className="mt-3">
                     <span className="text-purple-400">name</span>{' '}
                     <span className="text-gray-300">=</span>{' '}
-                    <span className="text-green-300">{'"AspireAI"'}</span>
+                    <span className="text-green-300">{"\"AvenzaAI\""}</span>
                   </div>
                   <div>
                     <span className="text-purple-400">greet</span>
@@ -117,7 +117,7 @@ export default function HeroSection({ user }: HeroSectionProps) {
                   </div>
                   <div className="mt-3 pt-3 border-t border-white/5 text-green-400">
                     <span className="text-gray-500"># </span>
-                    <span className="text-green-400">&gt; Hello, AspireAI!</span>
+                    <span className="text-green-400">&gt; Hello, AvenzaAI!</span>
                   </div>
                 </div>
               </div>

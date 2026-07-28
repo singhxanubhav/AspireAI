@@ -1,8 +1,8 @@
-# AspireAI
+# AvenzaAI
 
 Learn coding and AI with step-by-step tutorials, hands-on practice exercises, and an AI tutor available 24/7. Built for beginners.
 
-![AspireAI Screenshot](https://placehold.co/1200x630/4F3D8A/FFFFFF?text=AspireAI+Preview)
+![AvenzaAI Screenshot](https://placehold.co/1200x630/4F3D8A/FFFFFF?text=AvenzaAI+Preview)
 
 ## Tech Stack
 
@@ -39,7 +39,7 @@ Learn coding and AI with step-by-step tutorials, hands-on practice exercises, an
 ```bash
 # 1. Clone and install
 git clone <repo-url>
-cd aspire-ai
+cd avenza-ai
 npm install
 
 # 2. Configure environment

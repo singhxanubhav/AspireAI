@@ -47,7 +47,7 @@ export default function Navbar() {
             <Lightbulb className="h-5 w-5 text-white" />
           </div>
           <span className="text-xl font-bold font-heading text-brand-primary">
-            Aspire<span className="text-brand-accent">AI</span>
+            Avenza<span className="text-brand-accent">AI</span>
           </span>
         </Link>
 

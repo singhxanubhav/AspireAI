@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import HeroSection from "@/components/home/HeroSection";
 
 export const metadata: Metadata = {
-  title: "AspireAI — Learn Coding & AI",
+  title: "AvenzaAI — Learn Coding & AI",
   description: "Step-by-step tutorials, hands-on practice, and an AI tutor available 24/7. Perfect for beginners.",
 };
 import FeaturesSection from "@/components/home/FeaturesSection";

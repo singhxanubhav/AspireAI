@@ -73,7 +73,7 @@ export default function RegisterPage() {
               <Lightbulb className="h-6 w-6 text-white" />
             </div>
             <span className="text-2xl font-bold font-heading text-brand-primary">
-              Aspire<span className="text-brand-accent">AI</span>
+              Avenza<span className="text-brand-accent">AI</span>
             </span>
           </Link>
         </div>
