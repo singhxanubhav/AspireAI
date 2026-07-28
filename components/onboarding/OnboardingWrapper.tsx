@@ -14,5 +14,5 @@ export function OnboardingWrapper({
 
   if (!show) return null;
 
-  return <OnboardingModal name={userName} onComplete={() => setShow(false)} />;
+  return <OnboardingModal name={userName} onCompleteAction={() => setShow(false)} />;
 }

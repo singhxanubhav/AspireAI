@@ -25,10 +25,10 @@ const STEPS = [
 
 export function OnboardingModal({
   name,
-  onComplete,
+  onCompleteAction,
 }: {
   name: string | null;
-  onComplete: () => void;
+  onCompleteAction: () => void;
 }) {
   const [step, setStep] = useState(0);
   const [goal, setGoal] = useState<string | null>(null);
@@ -43,10 +43,10 @@ export function OnboardingModal({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ goal }),
       });
-      onComplete();
+      onCompleteAction();
       router.refresh();
     } catch {
-      onComplete();
+      onCompleteAction();
     } finally {
       setLoading(false);
     }
