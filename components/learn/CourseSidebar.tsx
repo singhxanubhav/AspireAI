@@ -245,7 +245,7 @@ export default function CourseSidebar({
 
   return (
     <>
-      <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:bg-brand-card md:sticky md:top-0 md:self-start md:h-screen md:max-h-screen">
+      <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:bg-brand-card md:h-full">
         <div className="flex-1 overflow-y-auto p-3">{sidebarContent}</div>
         {sidebarFooter}
       </aside>
