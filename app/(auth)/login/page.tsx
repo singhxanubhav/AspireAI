@@ -41,7 +41,9 @@ export default function LoginPage() {
         return;
       }
 
-      router.push("/learn");
+      const params = new URLSearchParams(window.location.search);
+      const callbackUrl = params.get("callbackUrl") || "/learn";
+      router.push(callbackUrl);
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");

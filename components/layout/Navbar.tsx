@@ -91,7 +91,7 @@ export default function Navbar() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem
-                  onClick={() => signOut()}
+                  onClick={() => signOut({ callbackUrl: "/" })}
                   className="flex items-center gap-2 text-red-500 cursor-pointer"
                 >
                   <LogOut className="h-4 w-4" />
@@ -160,7 +160,7 @@ export default function Navbar() {
                     <Button
                       variant="outline"
                       className="w-full justify-start text-red-500"
-                      onClick={() => signOut()}
+                      onClick={() => signOut({ callbackUrl: "/" })}
                     >
                       <LogOut className="h-4 w-4 mr-2" />
                       Logout
