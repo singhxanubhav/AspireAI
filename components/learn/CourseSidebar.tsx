@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import {
   Sheet,
@@ -21,6 +22,8 @@ import {
   Code2,
   BrainCircuit,
   Lightbulb,
+  LogOut,
+  User,
 } from "lucide-react";
 
 type CourseLesson = {
@@ -212,10 +215,39 @@ export default function CourseSidebar({
     </div>
   );
 
+  const { data: session, status } = useSession();
+  const user = session?.user;
+
+  const sidebarFooter = status === "authenticated" ? (
+    <div className="border-t border-border/60 p-3 bg-brand-card/50 space-y-2.5">
+      <div className="flex items-center gap-2.5 px-2 py-1">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-brand-primary/15 to-brand-accent/15 text-brand-primary font-bold text-xs border border-brand-primary/20">
+          {user?.name?.charAt(0)?.toUpperCase() || "U"}
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="truncate text-xs font-semibold text-foreground leading-tight">
+            {user?.name || "Student"}
+          </p>
+          <p className="truncate text-[10px] text-muted-foreground">
+            {user?.email || "Active learner"}
+          </p>
+        </div>
+      </div>
+      <button
+        onClick={() => signOut({ callbackUrl: "/" })}
+        className="w-full flex items-center justify-center gap-2 rounded-xl bg-red-500/10 hover:bg-red-500 text-red-600 hover:text-white dark:bg-red-500/15 dark:hover:bg-red-500 dark:text-red-400 dark:hover:text-white px-3 py-2 text-xs font-semibold transition-all duration-200 shadow-sm hover:shadow cursor-pointer"
+      >
+        <LogOut className="h-3.5 w-3.5" />
+        <span>Log Out</span>
+      </button>
+    </div>
+  ) : null;
+
   return (
     <>
       <aside className="hidden md:flex md:w-64 md:flex-col md:border-r md:bg-brand-card md:sticky md:top-0 md:self-start md:h-screen md:max-h-screen">
         <div className="flex-1 overflow-y-auto p-3">{sidebarContent}</div>
+        {sidebarFooter}
       </aside>
 
       <Sheet>
@@ -228,7 +260,7 @@ export default function CourseSidebar({
             <Menu className="h-5 w-5" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-72 p-0">
+        <SheetContent side="left" className="w-72 p-0 flex flex-col">
           <SheetHeader className="px-4 pt-6 pb-3 border-b border-border">
             <div className="flex items-center gap-2.5">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-primary to-brand-accent">
@@ -239,9 +271,10 @@ export default function CourseSidebar({
               </SheetTitle>
             </div>
           </SheetHeader>
-          <div className="overflow-y-auto px-3 pb-6 pt-3">
+          <div className="flex-1 overflow-y-auto px-3 pb-6 pt-3">
             {sidebarContent}
           </div>
+          {sidebarFooter}
         </SheetContent>
       </Sheet>
     </>
