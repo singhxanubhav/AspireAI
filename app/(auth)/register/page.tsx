@@ -56,8 +56,7 @@ export default function RegisterPage() {
         return;
       }
 
-      router.push("/learn");
-      router.refresh();
+      window.location.href = "/learn";
     } catch {
       setError("Something went wrong. Please try again.");
       setLoading(false);

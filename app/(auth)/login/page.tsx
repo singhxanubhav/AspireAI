@@ -43,8 +43,7 @@ export default function LoginPage() {
 
       const params = new URLSearchParams(window.location.search);
       const callbackUrl = params.get("callbackUrl") || "/learn";
-      router.push(callbackUrl);
-      router.refresh();
+      window.location.href = callbackUrl;
     } catch {
       setError("Something went wrong. Please try again.");
       setLoading(false);
